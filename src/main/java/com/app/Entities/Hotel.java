@@ -2,30 +2,40 @@ package com.app.Entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
+@ToString(exclude = { "bookings" ,"rooms"}, callSuper = true)
 public class Hotel extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hotelId;
     private String name;
     private String location;
     private String rating;
-
-    @OneToMany(mappedBy = "hotel")
+@JsonIgnore
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Booking> bookings;
-
-    @OneToMany(mappedBy = "hotel")
+@JsonIgnore
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Room> rooms;
 
+	public Hotel(String name, String location, String rating) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.rating = rating;
+	}
+
+    
   }

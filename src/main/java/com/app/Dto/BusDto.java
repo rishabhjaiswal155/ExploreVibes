@@ -1,0 +1,15 @@
+package com.app.Dto;
+
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class BusDto {
+    private Long busId;
+    private String busNumber;
+    }
+
